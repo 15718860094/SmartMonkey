@@ -1,6 +1,4 @@
-from utils.TimeTool import TimeTool
-from utils.ScreenShotTool import ScreenShotTool
-from settings import *
+
 import os
 import sys
 import logging
@@ -9,11 +7,12 @@ import time
 
 sys.path.append(os.getcwd())
 sys.path.append(os.path.join(os.getcwd(), 'utils'))
-
+from utils.TimeTool import TimeTool
+from utils.ScreenShotTool import ScreenShotTool
+from settings import *
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
 
 def singleton(cls):
     instances = {}

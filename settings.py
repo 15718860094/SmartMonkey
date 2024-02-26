@@ -12,7 +12,7 @@ attention_keyword = {
 # ScreenShotTool
 persistent=True # 是否永久保存截屏
 cache_path='data/screen_cache' # 截屏图片缓存路径
-shotcut_step=5 # 每次截屏的间隔时间
+shotcut_step=10 # 每次截屏的间隔时间
 
 # Log
 logging.basicConfig(level=logging.INFO,
