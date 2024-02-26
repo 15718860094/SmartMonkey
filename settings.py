@@ -15,5 +15,7 @@ cache_path='data/screen_cache' # 截屏图片缓存路径
 shotcut_step=10 # 每次截屏的间隔时间
 
 # Log
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')

@@ -1,7 +1,6 @@
 import os
 import pyautogui
 import TimeTool
-import settings
 from PIL import ImageGrab
 import logging
 logging.basicConfig(level=logging.DEBUG,
@@ -9,13 +8,9 @@ logging.basicConfig(level=logging.DEBUG,
 
 class ScreenShotTool:
     @staticmethod
-    def take_screenshot():
+    def take_screenshot(img_path):
         screenshot = pyautogui.screenshot()
-        img_path = os.path.join(
-            settings.cache_path, "%s.png" % TimeTool.TimeTool().formatted_time()
-        )
         screenshot.save(img_path)
-        return img_path
 
     @staticmethod
     def take_screenshot_PIL():

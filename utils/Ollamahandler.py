@@ -1,10 +1,8 @@
 import requests
 import json
+from settings import * 
 from ImageHandler import ImageHandler
 """参考文档: https://github.c§om/ollama/ollama/blob/main/docs/api.md """
-import logging
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
 class OllamaHandler(object):
@@ -34,5 +32,5 @@ class OllamaHandler(object):
         }
         headers = {'Content-Type': 'application/json'}
         response = requests.post(self.url, data=json.dumps(data), headers=headers)            
-        logging.debug(response.json()['response'])
+        logging.info(response.json()['response'])
         

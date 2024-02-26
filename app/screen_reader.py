@@ -1,11 +1,9 @@
 
 import os
+import shutil
 import sys
 import signal
 import time
-import logging
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 sys.path.append(os.getcwd())
 sys.path.append(os.path.join(os.getcwd(), 'utils'))
 from utils.TimeTool import TimeTool
@@ -32,13 +30,15 @@ class SingletonLoop:
         self.run()
 
     def run(self):
+        self.imgs_directory = os.path.join(cache_path, TimeTool().today_date)
         pid = os.getpid()
         logging.info("进程ID为: %s", pid)
-
+        if not os.path.exists(self.imgs_directory):
+            os.makedirs(self.imgs_directory)
         try:
             while True:
-                ScreenShotTool().take_screenshot()
-                img_path = ScreenShotTool.take_screenshot()
+                img_path = os.path.join(self.imgs_directory, "%s.png" % TimeTool.formatted_time())
+                ScreenShotTool.take_screenshot(img_path)
                 ollama_handler = OllamaHandler(model='llava', prompt='请用中文描述一下这个图片的内容')
                 ollama_handler.request_with_images(img_path)
                 
@@ -49,7 +49,9 @@ class SingletonLoop:
 
     def graceful_exit(self, signum, frame):
         logging.info("接收到信号，优雅地关闭程序。")
-        # 在这里添加一些清理操作，如果有的话
+        if not persistent:
+            shutil.rmtree(self.imgs_directory)
+            os.rmdir(self.imgs_directory)
         exit(0)
 
 
