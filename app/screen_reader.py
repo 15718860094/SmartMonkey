@@ -1,18 +1,20 @@
 
 import os
 import sys
-import logging
 import signal
 import time
-
+import logging
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 sys.path.append(os.getcwd())
 sys.path.append(os.path.join(os.getcwd(), 'utils'))
 from utils.TimeTool import TimeTool
 from utils.ScreenShotTool import ScreenShotTool
+from utils.OllamaHandler import OllamaHandler
+from utils.ImageHandler import ImageHandler
 from settings import *
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
 
 def singleton(cls):
     instances = {}
@@ -36,7 +38,12 @@ class SingletonLoop:
         try:
             while True:
                 ScreenShotTool().take_screenshot()
+                img_path = ScreenShotTool.take_screenshot()
+                ollama_handler = OllamaHandler(model='llava', prompt='请用中文描述一下这个图片的内容')
+                ollama_handler.request_with_images(img_path)
+                
                 time.sleep(shotcut_step)
+                
         except KeyboardInterrupt:
             self.graceful_exit(signal.SIGINT, None)
 
