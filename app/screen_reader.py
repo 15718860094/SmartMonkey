@@ -6,7 +6,7 @@ import signal
 
 # 定义退出函数
 def graceful_exit(signum, frame):
-    logging.info("接收到信号，优雅地关闭程序。")
+    logging.info("接收到退出信号，正在关闭程序")
     # TODO 添加程序逻辑
     exit(0)
 
