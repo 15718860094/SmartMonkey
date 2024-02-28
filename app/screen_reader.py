@@ -1,4 +1,9 @@
 
+from settings import *
+from utils.ImageHandler import ImageHandler
+from utils.OllamaHandler import OllamaHandler
+from utils.ScreenShotTool import ScreenShotTool
+from utils.TimeTool import TimeTool
 import os
 import shutil
 import sys
@@ -7,12 +12,6 @@ import time
 sys.path.append(os.getcwd())
 sys.path.append(os.path.join(os.getcwd(), 'utils'))
 sys.path.append(os.path.join(os.getcwd(), '.'))
-from utils.TimeTool import TimeTool
-from utils.ScreenShotTool import ScreenShotTool
-from utils.OllamaHandler import OllamaHandler
-from utils.ImageHandler import ImageHandler
-from settings import *
-
 
 
 def singleton(cls):
@@ -38,13 +37,15 @@ class SingletonLoop:
             os.makedirs(self.imgs_directory)
         try:
             while True:
-                img_path = os.path.join(self.imgs_directory, "%s.png" % TimeTool.formatted_time())
+                img_path = os.path.join(
+                    self.imgs_directory, "%s.png" % TimeTool.formatted_time())
                 ScreenShotTool.take_screenshot(img_path)
-                ollama_handler = OllamaHandler(model='llava', prompt='请用中文描述一下这个图片的内容')
+                ollama_handler = OllamaHandler(
+                    model='llava', prompt='请用中文描述一下这个图片的内容')
                 ollama_handler.request_with_images(img_path)
-                
+
                 time.sleep(shotcut_step)
-                
+
         except KeyboardInterrupt:
             self.graceful_exit(signal.SIGINT, None)
 
@@ -54,7 +55,6 @@ class SingletonLoop:
             shutil.rmtree(self.imgs_directory)
             os.rmdir(self.imgs_directory)
         exit(0)
-
 
 # 创建单例实例
 SingletonLoop()
