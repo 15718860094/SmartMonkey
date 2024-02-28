@@ -1,5 +1,6 @@
 import logging
 
+"""------------------screen reader------------------"""
 # Attention
 # 关注类别
 attention_type = {
@@ -24,3 +25,9 @@ logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+"""------------------stock dog------------------"""
+
+dream_code = {
+    "000683": "远兴能源"
+}

@@ -2,9 +2,7 @@ import os
 import pyautogui
 import TimeTool
 from PIL import ImageGrab
-import logging
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
 
 class ScreenShotTool:
     @staticmethod
