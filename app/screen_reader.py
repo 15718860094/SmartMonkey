@@ -6,6 +6,7 @@ import signal
 import time
 sys.path.append(os.getcwd())
 sys.path.append(os.path.join(os.getcwd(), 'utils'))
+sys.path.append(os.path.join(os.getcwd(), '.'))
 from utils.TimeTool import TimeTool
 from utils.ScreenShotTool import ScreenShotTool
 from utils.OllamaHandler import OllamaHandler

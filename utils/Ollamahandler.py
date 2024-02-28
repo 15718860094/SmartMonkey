@@ -28,7 +28,7 @@ class OllamaHandler(object):
         "model": self.model,
         "prompt": self.prompt,
         "stream": False,
-        "images": [ImageHandler(image_path).encode_image_base64()]
+        "images": [ImageHandler().encode_image_base64(image_path)]
         }
         headers = {'Content-Type': 'application/json'}
         response = requests.post(self.url, data=json.dumps(data), headers=headers)            
